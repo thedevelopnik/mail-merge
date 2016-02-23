@@ -11,14 +11,14 @@ $(document).ready(function () {
   }
 });
 
-$(document).on('click', $('.remove-button'), function() {
+$(document).on('click', '.remove-button', function() {
   var emailCount = document.getElementById('email-count');
   $(this).parent().remove();
   var numEmails = document.getElementsByClassName('remove-button').length;
   $(emailCount).html('Emails (' + numEmails + ')');
 });
 
-$(document).on('click', $('.edit'), function(e) {
+$(document).on('click', '.edit', function(e) {
   var thisButton = event.target;
   var thisBody = $(thisButton).prev();
   var currentBody = $(thisBody[0]).html();
