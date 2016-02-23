@@ -1,0 +1,101 @@
+{% extends 'layout.html' %}
+
+{% block title %}{% endblock %}
+
+
+{% block content %}
+
+<div class='wrapper'>
+  <div class="container-fluid">
+
+    <div class='row'>
+      <div class='col-md-12'>
+        <h1>Mail Merge</h1>
+      </div>
+    </div>
+
+    <div class='row'>
+      <div class='col-md-6'>
+        <p>
+          Enter names/emails (one per line):
+        </p>
+      </div>
+
+      <div class='col-md-6'>
+        <p>
+          Enter the text. The following substitutions are valid:
+        </p>
+        <ul>
+          <li>
+            {first}
+          </li>
+          <li>
+            {last}
+          </li>
+          <li>
+            {email}
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class='row'>
+      <div class='col-md-6 form-column'>
+        <form method='post'>
+        <div class='text-field'>
+          <textarea class='text-area fill-cont' name='merge' id='merge-data' placeholder='Joe,Jones,joe@example.com' autofocus>{{ merge }}</textarea>
+        </div>
+      </div>
+
+      <div class='col-md-6'>
+          <div class='text-field'>
+            <input type='text' name='subject' id='email-title' placeholder='subject' value='{{ subject }}'/>
+            <br /><br />
+            <textarea rows='9' cols='30' class='text-area' name='content' id='email-content' placeholder='body'>{{ content }}</textarea>
+            <br />
+          </div>
+      </div>
+    </div>
+
+      <div class='row'>
+        <div class='col-md-6'>
+        </div>
+        <div class='col-md-6'>
+          <input type='submit' id='preview' class='right' value='Preview'/>
+        </div>
+      </form>
+      </div>
+    </div>
+
+    <div class='row'>
+      <div class='col-md-1'>
+      </div>
+      <div class='col-md-11'>
+        <h2 id='email-count'>Emails ()</h2>
+      </div>
+    </div>
+
+    {% for data in emails %}
+    {% if data.first %}
+      <div class='row'>
+        <div class='col-md-1'>
+        </div>
+        <div class='col-md-10 email-preview'>
+          <button class='remove-button'>X</button>
+          <p>
+            <strong>To:</strong> {{data.first}} {{data.last}} <{{data.email}}>
+          </p>
+          <p>
+            <strong>Subject:</strong> {{data.subject}}
+          </p>
+          <p>{{data.emailContent}}</p>
+          <button class='edit'>Edit Body</button>
+        </div>
+        <div class='col-md-1'>
+        </div>
+      </div>
+    {% endif %}
+    {% endfor %}
+</div>
+
+{% endblock %}
